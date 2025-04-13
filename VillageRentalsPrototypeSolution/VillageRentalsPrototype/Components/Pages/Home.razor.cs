@@ -14,6 +14,7 @@ namespace VillageRentalsPrototype.Components.Pages
         protected override void OnInitialized() // overrides the OnInitializied method
         {
             systemManager.InitializeDatabase();
+            systemManager.PopulateIfEmpty();
         }
     }
 }

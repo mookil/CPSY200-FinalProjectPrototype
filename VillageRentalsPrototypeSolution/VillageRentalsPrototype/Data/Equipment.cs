@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace VillageRentalsPrototype.Data
 {
+    /// <summary>
+    /// An equipment object.
+    /// The format for an equipmentID is "E0000", where 0000 is an incrementing number.
+    /// </summary>
     public class Equipment
     {
         // Public Variables

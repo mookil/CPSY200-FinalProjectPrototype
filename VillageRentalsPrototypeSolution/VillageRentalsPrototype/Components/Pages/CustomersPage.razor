@@ -1,8 +1,38 @@
 ﻿@page "/customer"
-
+@* The Customer Management page.
+    The following functionality should be implemented:
+        - Add Customer
+        - Edit Customer (update info or delete customer)
+*@
 
 <h3>Customer Management</h3>
 
-@code {
-
-}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Contact Phone</th>
+            <th>Email</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Customers)
+        {
+            <tr>
+                <td>@customer.customerID</td>
+                <td>@customer.firstName</td>
+                <td>@customer.lastName</td>
+                <td>@customer.contactPhone</td>
+                <td>@customer.Email</td>
+                <td>@customer.customerNotes</td>
+                @* <td class="text-center"> *@
+                @*     <button class="btn btn-warning" @onclick="() => EditBook(book)">Edit</button> *@
+                @*     <button class="btn btn-danger" @onclick="() => DeleteBook(book)">Delete</button> *@
+                @* </td> *@
+            </tr>
+        }
+    </tbody>
+</table>

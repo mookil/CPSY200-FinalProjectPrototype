@@ -9,6 +9,7 @@ namespace VillageRentalsPrototype.Data
     /// <summary>
     /// [Customer]
     /// This class represents a Customer.
+    /// The format for a customerID is "C0000" where 0000 is an incrementing number.
     /// </summary>
     public class Customer
     {

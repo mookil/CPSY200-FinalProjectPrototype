@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace VillageRentalsPrototype.Data
 {
+    /// <summary>
+    /// Rental
+    /// This is a class for a Rental object. It takes in a customer, as well as a list of equipment.
+    /// The format for an RentalID is "R0000", where 0000 is an incrementing number.
+    /// </summary>
     public class Rental
     {
         // Public Variables
