@@ -9,7 +9,6 @@ namespace VillageRentalsPrototype.Data
     /// <summary>
     /// [Category]
     /// This class represents a category of an [Equipment] object.
-    /// It will be stored in a list in SystemManager.
     /// The format for a CategoryID is 10, 20, 30, 100, 110, etc.
     /// </summary>
     public class Category

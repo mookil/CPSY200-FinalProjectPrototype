@@ -21,7 +21,7 @@ namespace VillageRentalsPrototype.Data
         protected MySqlConnection connection;
 
         // Constructor
-        public SystemManager() 
+        public SystemManager()
         {
             string dbHost = "localhost";
             string dbUser = "root";
@@ -33,11 +33,11 @@ namespace VillageRentalsPrototype.Data
                 UserID = dbUser,
                 Password = dbPassword,
                 Database = "village_rentals", // use maria db to create a database called "village_rentals"
-                                               // (A database by the name of "village_rentals" must exist on the machine beforehand.)
+                                              // (A database by the name of "village_rentals" must exist on the machine beforehand.)
             };
 
             connection = new MySqlConnection(builder.ConnectionString); // Create a mySql Connection string with the builder.
-             
+
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace VillageRentalsPrototype.Data
         public void InitializeDatabase()
         {
             connection.Open();
-            
+
             // Create the "customers" table
             var sql = @"CREATE TABLE IF NOT EXISTS customers (
                 CustomerId          VARCHAR(10) PRIMARY KEY,
@@ -131,7 +131,7 @@ namespace VillageRentalsPrototype.Data
         {
             connection.Open();
 
-            var tablesToCheck = new[] { "customers", "categories", "equipment", "rentals", "rental_equipment" };
+            var tablesToCheck = new[] { "customers", "categories", "equipment", "rentals" };
             bool anyDataExists = false;
 
             foreach (var table in tablesToCheck)
@@ -196,24 +196,24 @@ namespace VillageRentalsPrototype.Data
             connection.Execute(sql);
 
             // Populate the rentals table
-            sql = @"INSERT INTO rentals (RentalId, Date, CustomerId, CustomerLastName, TotalFinalCost)
+            sql = @"INSERT INTO rentals (RentalId, Date, CustomerId, CustomerLastName, EquipmentId, DateRented, DateReturned, TotalFinalCost)
             VALUES
-                ('1000', '2/15/2024', '1001', 'Doe', 149.97),
-                ('1001', '2/16/2024', '1002', 'Johnson', 43.96)";
+                ('1000', '2/15/2024', '1001', 'Doe', '201', '2/20/2024', '2/23/2024', 149.97),
+                ('1001', '2/16/2024', '1002', 'Johnson', '501', '2/21/2024', '2/25/2024', 43.96)";
             connection.Execute(sql);
 
             // Populate the rental equipment table
-            sql = @"INSERT INTO rental_equipment (RentalId, EquipmentId, Name, DateRented, DateReturned)
-            VALUES
-                ('1000', '201', 'Hammer drill', '2/20/2024', '2/23/2024'),
-                ('1001', '501', 'Chainsaw', '2/21/2024', '2/25/2024')";
-            connection.Execute(sql);
+            //sql = @"INSERT INTO rental_equipment (RentalId, EquipmentId, Name, DateRented, DateReturned)
+            //VALUES
+            //    ('1000', '201', 'Hammer drill', '2/20/2024', '2/23/2024'),
+            //    ('1001', '501', 'Chainsaw', '2/21/2024', '2/25/2024')";
+            //connection.Execute(sql);
 
 
             connection.Close();
         }
         // Customer Methods
-        
+
         /// <summary>
         /// Gets all customers from the database and returns it as a list.
         /// </summary>
@@ -253,9 +253,9 @@ namespace VillageRentalsPrototype.Data
             {
                 Console.WriteLine($"An error has occured: {ex.Message}");
             }
-            finally 
-            { 
-                connection.Close(); 
+            finally
+            {
+                connection.Close();
             }
             return customers;
         }
@@ -272,7 +272,7 @@ namespace VillageRentalsPrototype.Data
             {
                 connection.Open();
                 string sql = "SELECT * from customers WHERE CustomerId = ?customerID";
-                MySqlCommand command = new MySqlCommand( sql, connection);
+                MySqlCommand command = new MySqlCommand(sql, connection);
 
                 command.Parameters.AddWithValue("@customerID", customerID);
 
@@ -387,7 +387,7 @@ namespace VillageRentalsPrototype.Data
             {
                 connection.Open();
                 string sql = "DELETE FROM customers where CustomerId = ?CustomerId";
-                MySqlCommand command = new MySqlCommand( sql, connection);
+                MySqlCommand command = new MySqlCommand(sql, connection);
 
                 command.Parameters.AddWithValue("@CustomerId", customerID);
 
@@ -406,7 +406,7 @@ namespace VillageRentalsPrototype.Data
         // Equipment Methods
 
 
-        public List<Equipment> GetEquipmentList() 
+        public List<Equipment> GetEquipmentList()
         {
             List<Equipment> EquipmentList = new List<Equipment>();
             try
@@ -447,7 +447,7 @@ namespace VillageRentalsPrototype.Data
             return EquipmentList;
         }
 
-        public Equipment GetEquipment(string equipmentID) 
+        public Equipment GetEquipment(string equipmentID)
         {
             Equipment tempEquipment = new Equipment();
             try
@@ -486,7 +486,7 @@ namespace VillageRentalsPrototype.Data
             return tempEquipment;
         }
 
-        public void AddEquipment(Equipment equipment) 
+        public void AddEquipment(Equipment equipment)
         {
             try
             {
@@ -513,7 +513,7 @@ namespace VillageRentalsPrototype.Data
             }
         }
 
-        public void UpdateEquipment(Equipment equipment) 
+        public void UpdateEquipment(Equipment equipment)
         {
             try
             {
@@ -537,7 +537,7 @@ namespace VillageRentalsPrototype.Data
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
-            { 
+            {
             }
             finally
             {
@@ -545,7 +545,7 @@ namespace VillageRentalsPrototype.Data
             }
         }
 
-        public void DeleteEquipment(string equipmentID) 
+        public void DeleteEquipment(string equipmentID)
         {
             try
             {
@@ -569,14 +569,14 @@ namespace VillageRentalsPrototype.Data
 
 
         // Category Methods
-        public List<Category> GetCategoryList() 
+        public List<Category> GetCategoryList()
         {
             List<Category> categoryList = new List<Category>();
             try
             {
                 connection.Open();
                 string sql = "SELECT * from categories;";
-                MySqlCommand command = new MySqlCommand( sql, connection);
+                MySqlCommand command = new MySqlCommand(sql, connection);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
@@ -592,8 +592,8 @@ namespace VillageRentalsPrototype.Data
                 }
 
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
             }
             finally
             {
@@ -606,11 +606,11 @@ namespace VillageRentalsPrototype.Data
         public void UpdateCategory() { }
         public void DeleteCategory() { }
         public void AddCategory() { }
-        
+
 
 
         // Rental Methods
-        public List<Rental> GetRentals() 
+        public List<Rental> GetRentals()
         {
             List<Rental> rentalsList = new List<Rental>();
             List<Equipment> rentalEquipment = new List<Equipment>();
@@ -626,13 +626,23 @@ namespace VillageRentalsPrototype.Data
 
                         Rental temp = new Rental
                         {
+                            RentalID = reader.GetString(0),
+                            Date = reader.GetString(1),
+                            CustomerID = reader.GetString(2),
+                            CustomerLastName = reader.GetString(3),
+                            EquipmentId = reader.GetString(4),
+                            RentalDate = reader.GetString(5),
+                            RentalReturn = reader.GetString(6),
+                            TotalFinalCost = reader.GetDecimal(7)
 
                         };
+                        rentalsList.Add(temp);
                     }
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"An error has occured: {ex.Message}");
             }
             finally
             {
@@ -640,12 +650,34 @@ namespace VillageRentalsPrototype.Data
             }
             return rentalsList;
         }
-        public Rental GetRental(string rentalId) 
+
+
+        public Rental GetRental(string rentalId)
         {
             Rental rental = new Rental();
             try
             {
                 connection.Open();
+                string sql = "SELECT * from rentals WHERE RentalId = ?RentalId;";
+                MySqlCommand command = new MySqlCommand(sql, connection);
+
+                command.Parameters.AddWithValue("RentalId", rentalId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        rental.RentalID = reader.GetString(0);
+                        rental.Date = reader.GetString(1);
+                        rental.CustomerID = reader.GetString(2);
+                        rental.CustomerLastName = reader.GetString(3);
+                        rental.EquipmentId = reader.GetString(4);
+                        rental.RentalDate = reader.GetString(5);
+                        rental.RentalReturn = reader.GetString(6);
+                        rental.TotalFinalCost = reader.GetDecimal(7);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -656,8 +688,34 @@ namespace VillageRentalsPrototype.Data
             }
             return rental;
         }
-        public void AddRental() { }
-        public void UpdateRental() { }
-        public void DeleteRental() { }
+        public void AddRental(Rental rental)
+        {
+            try
+            {
+                connection.Open();
+                string sql = "INSERT INTO rentals (RentalID, Date, CustomerID, CustomerLastName, EquipmentId, DateRented, DateReturned, TotalFinalCost) " +
+                    "VALUES (?RentalID, ?Date, ?CustomerID, ?CustomerLastName, ?EquipmentId, ?DateRented, ?DateReturned, ?TotalFinalCost)";
+                MySqlCommand command = new MySqlCommand(sql, connection);
+
+                command.Parameters.AddWithValue("@RentalID", rental.RentalID);
+                command.Parameters.AddWithValue("@Date", rental.Date);
+                command.Parameters.AddWithValue("@CustomerID", rental.CustomerID);
+                command.Parameters.AddWithValue("@CustomerLastName", rental.CustomerLastName);
+                command.Parameters.AddWithValue("@EquipmentId", rental.EquipmentId);
+                command.Parameters.AddWithValue("@DateRented", rental.RentalDate);
+                command.Parameters.AddWithValue("@DateReturned", rental.RentalReturn);
+                command.Parameters.AddWithValue("@TotalFinalCost", rental.TotalFinalCost);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

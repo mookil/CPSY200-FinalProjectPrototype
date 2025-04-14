@@ -25,10 +25,7 @@ namespace VillageRentalsPrototype.Components.Pages
         {
             EquipmentList = equipManager.GetEquipments();
             equipment = new Equipment();
-            foreach (var equip in EquipmentList)
-            {
-                Console.WriteLine(equip);
-            }
+            
         }
 
         //private string GenerateNewEquipmentID()

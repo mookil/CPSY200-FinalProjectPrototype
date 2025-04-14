@@ -8,7 +8,6 @@ namespace VillageRentalsPrototype.Data
 {
     /// <summary>
     /// An equipment object.
-    /// The format for an equipmentID is "E0000", where 0000 is an incrementing number.
     /// </summary>
     public class Equipment
     {
@@ -20,9 +19,9 @@ namespace VillageRentalsPrototype.Data
         public decimal DailyRentalCost { get; set; }
 
         // [These two variables are for Rental equipment.]
-        public string RentalDate { get; set; }
+        //public string RentalDate { get; set; }
 
-        public string RentalReturn { get; set; }
+        //public string RentalReturn { get; set; }
 
         // Constructor
         public Equipment()
