@@ -14,25 +14,19 @@ namespace VillageRentalsPrototype.Data
     public class Rental
     {
         // Public Variables
-        public Customer customer { get; }
-        public List<Equipment> EquipmentList { get; }
+        public Customer customer { get; set; }
+        public List<Equipment> EquipmentList { get; set; }
 
-        public string RentalID { get; }
-        public DateTime DateRented { get; }
-        public string CustomerID { get; }
-        public string CustomerLastName { get; }
-        public decimal TotalFinalCost { get; }
+        public string RentalID { get; set; }
+        public string Date { get; set; }
+        public string CustomerID { get; set; }
+        public string CustomerLastName { get; set; }
+        public string EquipmentId { get; set; }
+        public decimal TotalFinalCost { get; set; }
 
         // Constructor
-        public Rental (Customer customer, List<Equipment> equipmentList, string rentalID)
+        public Rental ()
         {
-            // should calculate total final cost based off of the equipment in the equipment list
-            this.customer = customer;
-            EquipmentList = equipmentList;
-            RentalID = rentalID;
-            DateRented = DateTime.Now; // sets date rented to current date
-            CustomerID = customer.customerID;
-            CustomerLastName = customer.lastName;
         }
 
         // Methods

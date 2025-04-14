@@ -42,10 +42,16 @@ namespace VillageRentalsPrototype.Data
 
         /// <summary>
         /// Saves all the changes made in app to the database.
+        /// [obsolete], not needed since the page refreshes itself after adding a new customer
         /// </summary>
-        public void SaveCustomerList()
-        {
+        //public void SaveCustomerList()
+        //{
 
+        //}
+
+        public Customer GetCustomer(string customerId)
+        {
+            return CustomerSystemManager.GetCustomer(customerId);
         }
 
         /// <summary>
@@ -59,19 +65,23 @@ namespace VillageRentalsPrototype.Data
         /// <summary>
         /// Creates a new customer. Should save the customer list after successfully adding.
         /// </summary>
-        public void CreateNewCustomer()
+        public void CreateNewCustomer(Customer customer)
         {
-
+            CustomerSystemManager.AddCustomer(customer);
         }
 
         /// <summary>
-        /// Updates an existing customer in the list. Should save the customer list after successfully editing.
+        /// Updates an existing customer in the list.
         /// </summary>
         /// <param name="customer"></param>
         public void UpdateCustomer(Customer customer) 
         { 
-        
+            CustomerSystemManager.UpdateCustomer(customer);
         }
 
+        public void DeleteCustomer(string customerId)
+        {
+            CustomerSystemManager.DeleteCustomer(customerId);
+        }
     }
 }

@@ -13,27 +13,26 @@ namespace VillageRentalsPrototype.Data
     public class Equipment
     {
         // Public Variables
-        public string equipmentID { get; }
-        public Category Category { get; }
-        public string Name { get; }
-        public string Description { get; }
-        public decimal DailyRentalCost { get; }
+        public string equipmentID { get; set; }
+        public string CategoryID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal DailyRentalCost { get; set; }
 
         // [These two variables are for Rental equipment.]
-        public DateTime RentalDate { get; }
+        public string RentalDate { get; set; }
 
-        public DateTime RentalReturn { get; }
+        public string RentalReturn { get; set; }
 
         // Constructor
-        public Equipment(string id, Category category, string name, string desc, decimal dailyrentalcost)
+        public Equipment()
         {
-            equipmentID = id;
-            Category = category;
-            Name = name;
-            Description = desc;
-            DailyRentalCost = dailyrentalcost;
         }
 
         // Methods
+        public override string ToString()
+        {
+            return $"{equipmentID} {Name}";
+        }
     }
 }

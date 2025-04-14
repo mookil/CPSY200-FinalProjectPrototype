@@ -14,22 +14,16 @@ namespace VillageRentalsPrototype.Data
     public class Customer
     {
         // Variables
-        public string customerID { get; }
-        public string firstName { get; }
-        public string lastName { get; }
-        public string contactPhone { get; }
-        public string Email { get; }
-        public string customerNotes { get; }
+        public string customerID { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string contactPhone { get; set; }
+        public string Email { get; set; }
+        public string customerNotes { get; set; }
 
         // Constructor
-        public Customer(string customerId, string firstname, string lastname, string contactphone, string email, string customernotes)
+        public Customer()
         {
-            customerID = customerId;
-            firstName = firstname;
-            lastName = lastname;
-            contactPhone = contactphone;
-            Email = email;
-            customerNotes = customernotes;
         }
 
         // Methods

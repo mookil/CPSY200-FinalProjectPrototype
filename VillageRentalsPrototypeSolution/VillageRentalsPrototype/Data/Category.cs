@@ -15,14 +15,12 @@ namespace VillageRentalsPrototype.Data
     public class Category
     {
         // Public Variables
-        public string CategoryID { get; }
-        public string CategoryDesc { get; }
+        public string CategoryID { get; set; }
+        public string CategoryDesc { get; set; }
 
         // Constructor
-        public Category (string categoryID, string desc)
+        public Category ()
         {
-            CategoryID = categoryID;
-            CategoryDesc = desc;
         }
 
         // Methods
