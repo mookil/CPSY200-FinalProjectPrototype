@@ -97,7 +97,8 @@ namespace VillageRentalsPrototype.Components.Pages
             if (Customers.Count == 0) // If the customer being added is the first customer, set ID to 1001.
             {
                 id = 1001;
-                return id.ToString();
+                
+                return Convert.ToString(id);
             }
             else // Otherwise, grab the highest id code from the list and increment it
             {
@@ -105,7 +106,7 @@ namespace VillageRentalsPrototype.Components.Pages
                 int highestID = Convert.ToInt32(temp.customerID);
                 id = highestID + 1;
 
-                return id.ToString();
+                return Convert.ToString(id);
             }
         }
 
