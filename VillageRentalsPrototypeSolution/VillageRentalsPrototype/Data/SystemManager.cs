@@ -241,10 +241,18 @@ namespace VillageRentalsPrototype.Data
                             firstName = reader.GetString(1),
                             lastName = reader.GetString(2),
                             contactPhone = reader.GetString(3),
-                            Email = reader.GetString(4),
-                            customerNotes = reader.GetString(5)
+                            Email = reader.GetString(4)
+                            
                         };
-                        customers.Add(customer);
+                        if (reader.IsDBNull(5)) // if null
+                        {
+                            customer.customerNotes = "";
+                        }
+                        else
+                        {
+                            customer.customerNotes = reader.GetString(5);
+                        }
+                            customers.Add(customer);
                     }
 
                 }
